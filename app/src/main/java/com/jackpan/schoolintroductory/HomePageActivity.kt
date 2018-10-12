@@ -42,6 +42,11 @@ class HomePageActivity : AppCompatActivity() {
             intent.setClass(this,MessageActivity::class.java)
             startActivity(intent)
         }
+        mButton2.setOnClickListener {
+            val intent = Intent()
+            intent.setClass(this,RecordActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }
