@@ -41,10 +41,8 @@ class SearchActivity : AppCompatActivity() {
 
         val curDate = Date(System.currentTimeMillis()) // 獲取當前時間
 
-        val str = formatter.format(curDate)
-        if (MySharedPrefernces.getList(this).size==0){
-            arrayList = MySharedPrefernces.getList(this)
-        }
+        val str ="搜尋時間："+ formatter.format(curDate)
+        arrayList = MySharedPrefernces.getList(this)
         arrayList.add(str)
         MySharedPrefernces.setList(this,arrayList)
     }
