@@ -27,6 +27,11 @@ class HomePageActivity : AppCompatActivity() {
         mButton2 = findViewById(R.id.button2)
         mButton3 = findViewById(R.id.button3)
         mButton4 = findViewById(R.id.button4)
+        mButton3.setOnClickListener {
+            val intent  =Intent()
+            intent.setClass(this,SearchActivity::class.java)
+            startActivity(intent)
+        }
         mButton.setOnClickListener {
             val intent=Intent()
             intent.setClass(this,MapsActivity::class.java)
