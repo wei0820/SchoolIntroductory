@@ -1,5 +1,6 @@
 package com.jackpan.schoolintroductory
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -21,7 +22,12 @@ class MessageActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, TitleArray)
         mListView.adapter = adapter
         mListView.setOnItemClickListener { parent, view, position, id ->
-            Log.d("Jack",UrlArray[position].toString())
+            val intent = Intent()
+            val bundle = Bundle()
+            bundle.putString("Url",UrlArray[position].toString())
+            intent.putExtras(bundle)
+            intent.setClass(this,WebViewActivity::class.java)
+            startActivity(intent)
         }
     }
 
