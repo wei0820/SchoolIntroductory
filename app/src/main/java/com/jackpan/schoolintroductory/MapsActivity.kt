@@ -43,7 +43,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
-        checkPermission()
         initLayout()
     }
 
@@ -64,6 +63,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
         mMap.setOnCameraMoveListener(this)
         mMap.setOnCameraMoveCanceledListener(this)
         mMap.setOnCameraIdleListener(this)
+        mMap.setMaxZoomPreference(20.0f)
     }
     fun checkPermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
@@ -79,10 +79,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager?
-
         try {
             // Request location updates
-            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, locationListener)
+            locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0L, 0f, locationListener)
         } catch (ex: SecurityException) {
             Log.d("myTag", "Security Exception, no location available")
         }
@@ -118,6 +117,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
             Log.d("Location", location.longitude.toString())
             var latlon: String = location.latitude.toString() + "," + location.longitude.toString()
 //            locationTextView.text = "${location.latitude} - ${location.longitude}"
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude, location.longitude), 20f))
 
 
         }
