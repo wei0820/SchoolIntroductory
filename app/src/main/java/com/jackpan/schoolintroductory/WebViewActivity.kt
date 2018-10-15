@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.webkit.WebView
 import android.webkit.WebViewClient
 
@@ -27,6 +28,7 @@ class WebViewActivity : AppCompatActivity() {
 
     fun getData(){
         url = intent.extras.getString("Url")
+        Log.d("Jack",url)
     }
 
     private fun initWebViewSettings() {
