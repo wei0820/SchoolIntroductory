@@ -28,7 +28,6 @@ class WebViewActivity : AppCompatActivity() {
 
     fun getData(){
         url = intent.extras.getString("Url")
-        Log.d("Jack",url)
     }
 
     private fun initWebViewSettings() {
