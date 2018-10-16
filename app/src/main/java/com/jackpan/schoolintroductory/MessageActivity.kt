@@ -1,6 +1,7 @@
 package com.jackpan.schoolintroductory
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -16,9 +17,9 @@ class MessageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_message)
         mListView = findViewById(R.id.listview)
-        TitleArray = arrayListOf("國立台中科技大學", "國立台中科技大學-資訊管理系"
-                , "台中科技大學-進修部"
-                , "台中科技大學-進修學院",
+        TitleArray = arrayListOf("國立台中科技大學", "國立台中科技大學-資訊管理系",
+                "台中科技大學-進修部",
+                "台中科技大學-進修學院",
                 "台中科技大學-空中學院",
                 "教務處",
                 "總務處",
@@ -62,6 +63,10 @@ class MessageActivity : AppCompatActivity() {
             intent.putExtras(bundle)
             intent.setClass(this, WebViewActivity::class.java)
             startActivity(intent)
+
+//            val uri = Uri.parse(UrlArray[position].toString())
+//            val it = Intent(Intent.ACTION_VIEW, uri)
+//            startActivity(it)
         }
     }
 
