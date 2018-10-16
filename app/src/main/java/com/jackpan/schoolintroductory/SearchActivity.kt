@@ -1,23 +1,18 @@
 package com.jackpan.schoolintroductory
 
+import android.content.Intent
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
+import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.model.LatLng
-
-import kotlinx.android.synthetic.main.activity_search.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-import android.content.Intent
-import android.net.Uri
 
 
 class SearchActivity : AppCompatActivity() {
@@ -61,15 +56,15 @@ class SearchActivity : AppCompatActivity() {
                 ,"24.150164,120.683574")
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, TitleArray)
         mListView.adapter = adapter
-        setTime()
         mListView.setOnItemClickListener { parent, view, position, id ->
             goToMap(mNowAdd,latlonArray.get(position).toString())
+            setTime(TitleArray.get(position).toString())
         }
     }
-    fun setTime(){
+    fun setTime(name:String){
         val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         val curDate = Date(System.currentTimeMillis()) // 獲取當前時間
-        val str ="搜尋時間："+ formatter.format(curDate)
+        val str =name +"\n\n"+"搜尋時間："+ formatter.format(curDate)
         arrayList = MySharedPrefernces.getList(this)
         arrayList.add(str)
         MySharedPrefernces.setList(this,arrayList)
@@ -88,8 +83,6 @@ class SearchActivity : AppCompatActivity() {
     }
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
-            Log.d("Location", location.latitude.toString())
-            Log.d("Location", location.longitude.toString())
             mNowAdd = location.latitude.toString() + "," + location.longitude.toString()
 //            locationTextView.text = "${location.latitude} - ${location.longitude}"
 
