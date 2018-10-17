@@ -69,6 +69,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
         mMap.setOnCameraMoveCanceledListener(this)
         mMap.setOnCameraIdleListener(this)
         mMap.setMaxZoomPreference(20.0f)
+        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE)
+
     }
     fun checkPermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
