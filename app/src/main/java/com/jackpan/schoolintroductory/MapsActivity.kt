@@ -1,6 +1,7 @@
 package com.jackpan.schoolintroductory
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
@@ -16,12 +17,14 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
+import com.google.android.gms.maps.model.Marker
+
+
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCameraIdleListener, GoogleMap.OnCameraMoveCanceledListener, GoogleMap.OnCameraMoveListener, GoogleMap.OnCameraMoveStartedListener {
+
+
     override fun onCameraMoveStarted(p0: Int) {
 
     }
@@ -44,6 +47,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
         initLayout()
+
+
     }
 
     /**
@@ -81,7 +86,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager?
         try {
             // Request location updates
-            locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0L, 0f, locationListener)
+            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, locationListener)
         } catch (ex: SecurityException) {
             Log.d("myTag", "Security Exception, no location available")
         }
@@ -99,16 +104,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
         }
     }
     // 在地圖加入指定位置與標題的標記
-    private fun addMarker(place: LatLng, title: String, context: String, array: Array<String>) {
-//        var icon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.mipmap.loction_icon)
+    private fun addMarker(place: LatLng, title: String, context: String) {
+        var icon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)
 
-//        val markerOptions = MarkerOptions()
-//        markerOptions.position(place)
-//                .title(title)
-//                .snippet(context)
-//                .icon(icon)
-//
-//        mMap.addMarker(markerOptions)
+        val markerOptions = MarkerOptions()
+        markerOptions.position(place)
+                .title(title)
+                .snippet(context)
+                .icon(icon)
+
+        mMap.addMarker(markerOptions)
     }
 
     private val locationListener: LocationListener = object : LocationListener {
@@ -119,11 +124,27 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
 //            locationTextView.text = "${location.latitude} - ${location.longitude}"
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude, location.longitude), 20f))
 
+            addMarker(LatLng(25.062179, 121.537813),
+                    "Fuck you",
+                    "Shit")
+
+            mMap.setOnMarkerClickListener(gmapListener)
+
 
         }
 
         override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
         override fun onProviderEnabled(provider: String) {}
         override fun onProviderDisabled(provider: String) {}
+    }
+
+    // 按下標記觸發 OnMarkerClick 事件
+    private val gmapListener = GoogleMap.OnMarkerClickListener { marker ->
+        marker.showInfoWindow()
+        // 用吐司顯示註解
+       val  intent = Intent()
+        intent.setClass(this@MapsActivity,CameraViewActivity::class.java)
+        startActivity(intent)
+        true
     }
 }
