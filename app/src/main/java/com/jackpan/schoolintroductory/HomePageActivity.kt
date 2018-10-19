@@ -12,7 +12,6 @@ import android.widget.Toast
 class HomePageActivity : AppCompatActivity() {
     lateinit var mButton: Button
     lateinit var mButton2: Button
-
     lateinit var mButton3: Button
     lateinit var mButton4: Button
     val MY_PERMISSIONS_REQUEST_LOCATION = 100

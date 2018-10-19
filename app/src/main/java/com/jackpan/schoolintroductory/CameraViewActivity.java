@@ -136,7 +136,6 @@ public class CameraViewActivity extends Activity implements
 	public void onLocationChanged(Location location) {
 		mMyLatitude = location.getLatitude();
 		mMyLongitude = location.getLongitude();
-
 		mAzimuthTeoretical = calculateTeoreticalAzimuth();
 		Toast.makeText(this,"latitude: "+location.getLatitude()+" longitude: "+location.getLongitude(), Toast.LENGTH_SHORT).show();
 		updateDescription();
@@ -163,7 +162,6 @@ public class CameraViewActivity extends Activity implements
 		pointerIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(CameraViewActivity.this,"fuck you ", Toast.LENGTH_SHORT).show();
 			}
 		});
 		updateDescription();
