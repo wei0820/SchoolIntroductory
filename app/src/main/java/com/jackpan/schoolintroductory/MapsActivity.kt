@@ -43,6 +43,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
 
     val MY_PERMISSIONS_REQUEST_LOCATION = 100
     private var locationManager: LocationManager? = null
+    var mLat :Double = 0.0
+    var mLon :Double = 0.0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
@@ -70,6 +72,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
         mMap.setOnCameraIdleListener(this)
         mMap.setMaxZoomPreference(20.0f)
         mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE)
+
+        addMarker(LatLng(25.062179, 121.537813),
+                "Fuck you",
+                "Shit")
 
     }
     fun checkPermission() {
@@ -107,7 +113,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
     }
     // 在地圖加入指定位置與標題的標記
     private fun addMarker(place: LatLng, title: String, context: String) {
-        var icon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)
+        var icon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.mipmap.map_icon_black)
 
         val markerOptions = MarkerOptions()
         markerOptions.position(place)
@@ -122,13 +128,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
         override fun onLocationChanged(location: Location) {
             Log.d("Location", location.latitude.toString())
             Log.d("Location", location.longitude.toString())
+            mLat= location.latitude
+            mLon =location.longitude
             var latlon: String = location.latitude.toString() + "," + location.longitude.toString()
 //            locationTextView.text = "${location.latitude} - ${location.longitude}"
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude, location.longitude), 20f))
 
-            addMarker(LatLng(25.062179, 121.537813),
-                    "Fuck you",
-                    "Shit")
 
             mMap.setOnMarkerClickListener(gmapListener)
 
@@ -144,9 +149,29 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
     private val gmapListener = GoogleMap.OnMarkerClickListener { marker ->
         marker.showInfoWindow()
         // 用吐司顯示註解
-       val  intent = Intent()
-        intent.setClass(this@MapsActivity,CameraViewActivity::class.java)
-        startActivity(intent)
+        Log.d("Jack",marker.position.latitude.toString())
+        Log.d("Jack",marker.position.longitude.toString())
+        Log.d("Jack",Distance(mLat,mLon,marker.position.latitude,marker.position.longitude).toString())
+        Toast.makeText(this@MapsActivity,"距離"+Distance(mLat,mLon,marker.position.latitude,marker.position.longitude)+"公尺",Toast.LENGTH_SHORT).show()
+//       val  intent = Intent()
+//        intent.setClass(this@MapsActivity,CameraViewActivity::class.java)
+//        startActivity(intent)
         true
     }
+
+
+    //帶入使用者及景點經緯度可計算出距離
+    fun Distance(longitude1: Double, latitude1: Double, longitude2: Double, latitude2: Double): Double {
+        val radLatitude1 = latitude1 * Math.PI / 180
+        val radLatitude2 = latitude2 * Math.PI / 180
+        val l = radLatitude1 - radLatitude2
+        val p = longitude1 * Math.PI / 180 - longitude2 * Math.PI / 180
+        var distance = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(l / 2), 2.0) + (Math.cos(radLatitude1) * Math.cos(radLatitude2)
+                * Math.pow(Math.sin(p / 2), 2.0))))
+        distance = distance * 6378137.0
+        distance = (Math.round(distance * 10000) / 10000).toDouble()
+
+        return distance
+    }
+
 }
