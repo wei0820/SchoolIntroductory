@@ -1,7 +1,6 @@
 package com.jackpan.schoolintroductory
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
@@ -18,7 +17,6 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
-import com.google.android.gms.maps.model.Marker
 
 
 
@@ -45,11 +43,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
     private var locationManager: LocationManager? = null
     var mLat :Double = 0.0
     var mLon :Double = 0.0
+    var mLatLngArray = ArrayList<LatLng>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
         initLayout()
-
+        mLatLngArray = arrayListOf(
+                LatLng(24.150137, 120.682460),
+                LatLng(24.150400, 120.683218),
+                LatLng(24.149792, 120.683767),
+                LatLng(24.150435, 120.683870),
+                LatLng(24.149163, 120.682901),
+                LatLng(24.149931, 120.683975),
+                LatLng(24.151192, 120.682705),
+                LatLng(24.151341, 120.683889),
+                LatLng(24.151341, 120.683889),
+                LatLng(24.149178, 120.683542)
+                )
 
     }
 
@@ -72,10 +83,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
         mMap.setOnCameraIdleListener(this)
         mMap.setMaxZoomPreference(20.0f)
         mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE)
+        mLatLngArray.forEach {
+            addMarker(it,
+                    "test",
+                    "test")
+        }
 
-        addMarker(LatLng(25.062179, 121.537813),
-                "Fuck you",
-                "Shit")
 
     }
     fun checkPermission() {
@@ -114,7 +127,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
     // 在地圖加入指定位置與標題的標記
     private fun addMarker(place: LatLng, title: String, context: String) {
         var icon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.mipmap.map_icon_black)
-
         val markerOptions = MarkerOptions()
         markerOptions.position(place)
                 .title(title)
