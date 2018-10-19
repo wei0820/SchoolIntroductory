@@ -3,16 +3,11 @@ package com.jackpan.schoolintroductory
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
-
-import kotlinx.android.synthetic.main.activity_home_page.*
 
 class HomePageActivity : AppCompatActivity() {
     lateinit var mButton: Button
@@ -64,7 +59,6 @@ class HomePageActivity : AppCompatActivity() {
     }
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
-
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             } else {
                 Toast.makeText(this, "需要定位功能,才能使用喔", Toast.LENGTH_SHORT).show()
