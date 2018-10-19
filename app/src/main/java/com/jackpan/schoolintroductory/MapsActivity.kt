@@ -1,6 +1,7 @@
 package com.jackpan.schoolintroductory
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
@@ -161,13 +162,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
     private val gmapListener = GoogleMap.OnMarkerClickListener { marker ->
         marker.showInfoWindow()
         // 用吐司顯示註解
-        Log.d("Jack",marker.position.latitude.toString())
-        Log.d("Jack",marker.position.longitude.toString())
-        Log.d("Jack",Distance(mLat,mLon,marker.position.latitude,marker.position.longitude).toString())
-        Toast.makeText(this@MapsActivity,"距離"+Distance(mLat,mLon,marker.position.latitude,marker.position.longitude)+"公尺",Toast.LENGTH_SHORT).show()
-//       val  intent = Intent()
-//        intent.setClass(this@MapsActivity,CameraViewActivity::class.java)
-//        startActivity(intent)
+//        Log.d("Jack",marker.position.latitude.toString())
+//        Log.d("Jack",marker.position.longitude.toString())
+//        Log.d("Jack",Distance(mLat,mLon,marker.position.latitude,marker.position.longitude).toString())
+//        Toast.makeText(this@MapsActivity,
+//                "距離"+Distance(mLat,mLon,marker.position.latitude,marker.position.longitude)+
+//                        "公尺",Toast.LENGTH_SHORT).show()
+       val  intent = Intent()
+        intent.setClass(this@MapsActivity,CameraViewActivity::class.java)
+        startActivity(intent)
         true
     }
 
