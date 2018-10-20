@@ -13,8 +13,7 @@ class RecordActivity : AppCompatActivity() {
         mListView = findViewById(R.id.listview)
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, MySharedPrefernces.getList(this))
         mListView.adapter = adapter
-//        MySharedPrefernces.getList(this).forEach {
-//        }
+
     }
 
 }
