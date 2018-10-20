@@ -8,7 +8,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.Toast
-
+// 首頁
 class HomePageActivity : AppCompatActivity() {
     lateinit var mButton: Button
     lateinit var mButton2: Button

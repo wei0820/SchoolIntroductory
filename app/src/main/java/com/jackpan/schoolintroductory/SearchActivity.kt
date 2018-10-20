@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-
+// 搜尋
 class SearchActivity : AppCompatActivity() {
     lateinit var mListView: ListView
     var TitleArray =ArrayList<String>()

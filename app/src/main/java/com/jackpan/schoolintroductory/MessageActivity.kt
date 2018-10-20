@@ -8,7 +8,7 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import java.lang.reflect.Array
-
+// 訊息
 class MessageActivity : AppCompatActivity() {
     lateinit var mListView: ListView
     var TitleArray = ArrayList<String>()

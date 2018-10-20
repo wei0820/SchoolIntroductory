@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import android.widget.ListView
-
+// 紀錄
 class RecordActivity : AppCompatActivity() {
     lateinit var mListView: ListView
     override fun onCreate(savedInstanceState: Bundle?) {
