@@ -6,10 +6,13 @@ import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +43,7 @@ public class CameraViewActivity extends Activity implements
 
 	TextView descriptionTextView;
 	ImageView pointerIcon;
+	TextView mTimeText;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -147,6 +151,19 @@ public class CameraViewActivity extends Activity implements
 		mAzimuthTeoretical = calculateTeoreticalAzimuth();
 
 		pointerIcon = (ImageView) findViewById(R.id.icon);
+		//動畫路徑設定(x1,x2,y1,y2)
+		Animation am = new TranslateAnimation(10,200,10,500);
+
+		//動畫開始到結束的時間，2秒
+		am.setDuration( 2000 );
+
+		// 動畫重覆次數 (-1表示一直重覆，0表示不重覆執行，所以只會執行一次)
+		am.setRepeatCount(-1);
+
+		//將動畫寫入ImageView
+		pointerIcon.setAnimation(am);
+		//開始動畫
+		am.startNow();
 
 		double minAngle = calculateAzimuthAccuracy(mAzimuthTeoretical).get(0);
 		double maxAngle = calculateAzimuthAccuracy(mAzimuthTeoretical).get(1);
@@ -191,6 +208,20 @@ public class CameraViewActivity extends Activity implements
 	}
 
 	private void setupLayout() {
+		mTimeText =findViewById(R.id.time);
+		new CountDownTimer(20000,1000){
+
+			@Override
+			public void onFinish() {
+				mTimeText.setText("Done!");
+			}
+
+			@Override
+			public void onTick(long millisUntilFinished) {
+				mTimeText.setText(""+millisUntilFinished/1000);
+			}
+
+		}.start();
 		descriptionTextView = (TextView) findViewById(R.id.cameraTextView);
 		descriptionTextView.setVisibility(View.GONE);
 		getWindow().setFormat(PixelFormat.UNKNOWN);
