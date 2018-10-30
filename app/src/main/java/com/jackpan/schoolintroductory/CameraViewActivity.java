@@ -14,6 +14,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -193,21 +194,6 @@ public class CameraViewActivity extends Activity implements
 		mAzimuthReal = azimuthChangedTo;
 		mAzimuthTeoretical = calculateTeoreticalAzimuth();
 
-
-		//動畫路徑設定(x1,x2,y1,y2)
-		Animation am = new TranslateAnimation(10,200,10,500);
-
-		//動畫開始到結束的時間，2秒
-		am.setDuration( 2000 );
-
-		// 動畫重覆次數 (-1表示一直重覆，0表示不重覆執行，所以只會執行一次)
-		am.setRepeatCount(-1);
-
-		//將動畫寫入ImageView
-		pointerIcon.setAnimation(am);
-		//開始動畫
-		am.startNow();
-
 		double minAngle = calculateAzimuthAccuracy(mAzimuthTeoretical).get(0);
 		double maxAngle = calculateAzimuthAccuracy(mAzimuthTeoretical).get(1);
 		Log.d(TAG, "onAzimuthChanged: "+minAngle);
@@ -256,12 +242,18 @@ public class CameraViewActivity extends Activity implements
 		myCurrentAzimuth = new MyCurrentAzimuth(this, this);
 		myCurrentAzimuth.start();
 	}
+	Animation mAnimation = null ;
 
 	private void setupLayout() {
 		mTimeText =findViewById(R.id.time);
 		pointerIcon = (ImageView) findViewById(R.id.icon);
 		int i = (int)(Math.random()* mMonsterprimary.length);
 		pointerIcon.setImageResource(mMonsterprimary[i]);
+
+		mAnimation = AnimationUtils.loadAnimation(this,R.anim. balloonscale);
+		pointerIcon.setAnimation(mAnimation );
+		mAnimation.start();
+
 		new CountDownTimer(20000,1000){
 
 			@Override
