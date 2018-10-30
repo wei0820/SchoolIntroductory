@@ -93,7 +93,6 @@ public class CameraViewActivity extends Activity implements
 		setupListeners();
 		setupLayout();
 		setAugmentedRealityPoint();
-		mMonsterprimary
 
 	}
 
@@ -194,7 +193,7 @@ public class CameraViewActivity extends Activity implements
 		mAzimuthReal = azimuthChangedTo;
 		mAzimuthTeoretical = calculateTeoreticalAzimuth();
 
-		pointerIcon = (ImageView) findViewById(R.id.icon);
+
 		//動畫路徑設定(x1,x2,y1,y2)
 		Animation am = new TranslateAnimation(10,200,10,500);
 
@@ -260,6 +259,9 @@ public class CameraViewActivity extends Activity implements
 
 	private void setupLayout() {
 		mTimeText =findViewById(R.id.time);
+		pointerIcon = (ImageView) findViewById(R.id.icon);
+		int i = (int)(Math.random()* mMonsterprimary.length);
+		pointerIcon.setImageResource(mMonsterprimary[i]);
 		new CountDownTimer(20000,1000){
 
 			@Override
