@@ -5,6 +5,8 @@ import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.location.Location;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -44,16 +46,21 @@ public class CameraViewActivity extends Activity implements
 	TextView descriptionTextView;
 	ImageView pointerIcon;
 	TextView mTimeText;
+	private SoundPool soundPool,soundPool2;
+	private int alertId,alertId2;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_camera_view);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
+		soundPool2 = new SoundPool(1, AudioManager.STREAM_MUSIC, 5);
+		alertId2 = soundPool2.load(this, R.raw.monster_roaning2, 1);
 		setupListeners();
 		setupLayout();
 		setAugmentedRealityPoint();
+
+
 	}
 
 	private void setAugmentedRealityPoint() {
@@ -63,6 +70,7 @@ public class CameraViewActivity extends Activity implements
 				25.062179, 121.537813
 
 		);
+
 	}
 
 	public double calculateTeoreticalAzimuth() {
@@ -143,6 +151,8 @@ public class CameraViewActivity extends Activity implements
 		mAzimuthTeoretical = calculateTeoreticalAzimuth();
 		Toast.makeText(this,"latitude: "+location.getLatitude()+" longitude: "+location.getLongitude(), Toast.LENGTH_SHORT).show();
 		updateDescription();
+		soundPool2.play(alertId2, 1.0F, 1.0F, 0, 0, 1.0F);
+
 	}
 
 	@Override
@@ -173,15 +183,19 @@ public class CameraViewActivity extends Activity implements
 		Log.d(TAG, "onAzimuthChanged: "+(isBetween(minAngle, maxAngle, mAzimuthReal)));
 		if (isBetween(minAngle, maxAngle, mAzimuthReal)) {
 			pointerIcon.setVisibility(View.VISIBLE);
+
 		} else {
 			pointerIcon.setVisibility(View.INVISIBLE);
 		}
 		pointerIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				soundPool.play(alertId, 1.0F, 1.0F, 0, 0, 1.0F);
+
 			}
 		});
 		updateDescription();
+
 	}
 
 	@Override
@@ -196,6 +210,9 @@ public class CameraViewActivity extends Activity implements
 		super.onResume();
 		myCurrentAzimuth.start();
 		myCurrentLocation.start();
+		soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 5);
+		alertId = soundPool.load(this, R.raw.middle_punch1, 1);
+
 	}
 
 	private void setupListeners() {
@@ -229,6 +246,7 @@ public class CameraViewActivity extends Activity implements
 		mSurfaceHolder = surfaceView.getHolder();
 		mSurfaceHolder.addCallback(this);
 		mSurfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+
 	}
 
 	@Override
