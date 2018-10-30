@@ -13,8 +13,12 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
+import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -250,10 +254,51 @@ public class CameraViewActivity extends Activity implements
 		int i = (int)(Math.random()* mMonsterprimary.length);
 		pointerIcon.setImageResource(mMonsterprimary[i]);
 
-		mAnimation = AnimationUtils.loadAnimation(this,R.anim. balloonscale);
-		pointerIcon.setAnimation(mAnimation );
-		mAnimation.start();
+//		mAnimation = AnimationUtils.loadAnimation(this,R.anim. balloonscale);
+//		pointerIcon.setAnimation(mAnimation );
+//		mAnimation.start();
 
+		TranslateAnimation animation = new TranslateAnimation(0,800,0,300);          //  new TranslateAnimation(xFrom,xTo, yFrom,yTo)
+		animation.setDuration(1000);  // animation duration
+//		animation.setRepeatCount(5);  // animation repeat count
+		animation.setRepeatCount(-1);   // repeat animation (left to right, right to left )
+		//移動效果
+		Animation amTranslate = new TranslateAnimation(0.0f, 100.0f, 0.0f, 100.0f);
+		//setDuration (long durationMillis) 設定動畫開始到結束的執行時間
+		amTranslate.setDuration(2000);
+		//setRepeatCount (int repeatCount) 設定重複次數 -1為無限次數 0
+		amTranslate.setRepeatCount(-1);
+
+		//旋轉效果
+		Animation amRotate = new RotateAnimation(0.0f, 360.0f, 0.0f, 100.0f);
+		//setDuration (long durationMillis) 設定動畫開始到結束的執行時間
+		amRotate.setDuration(2000);
+		//setRepeatCount (int repeatCount) 設定重複次數 -1為無限次數 0
+		amRotate.setRepeatCount(-1);
+
+		//放大縮小效果
+		Animation amScale = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f);
+		//setDuration (long durationMillis) 設定動畫開始到結束的執行時間
+		amRotate.setDuration(2000);
+		//setRepeatCount (int repeatCount) 設定重複次數 -1為無限次數 0
+		amRotate.setRepeatCount(-1);
+
+		//淡進淡出效果
+		Animation amAlpha = new AlphaAnimation(1.0f, 0.0f);
+		//setDuration (long durationMillis) 設定動畫開始到結束的執行時間
+		amAlpha.setDuration(2000);
+		//setRepeatCount (int repeatCount) 設定重複次數 -1為無限次數 0
+		amAlpha.setRepeatCount(-1);
+
+		//特效組合
+		AnimationSet amSet = new AnimationSet(false);
+		amSet.addAnimation(animation);
+//		amSet.addAnimation(amRotate);
+		amSet.addAnimation(amScale);
+		amSet.addAnimation(amAlpha);
+
+		//將動畫參數設定到圖片並開始執行動畫
+		pointerIcon.startAnimation(amSet);
 		new CountDownTimer(20000,1000){
 
 			@Override
