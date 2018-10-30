@@ -48,6 +48,40 @@ public class CameraViewActivity extends Activity implements
 	TextView mTimeText;
 	private SoundPool soundPool,soundPool2;
 	private int alertId,alertId2;
+	int[] mMonsterprimary = new int[]{
+			R.mipmap.monsterprimary_1,
+			R.mipmap.monsterprimary_2,
+			R.mipmap.monsterprimary_3,
+			R.mipmap.monsterprimary_4,
+			R.mipmap.monsterprimary_5,
+			R.mipmap.monsterprimary_6,
+			R.mipmap.monsterprimary_7,
+			R.mipmap.monsterprimary_8,
+			R.mipmap.monsterprimary_9,
+			R.mipmap.monsterprimary10,
+			R.mipmap.monsterprimary_20,
+			R.mipmap.monsterprimary_21,
+			R.mipmap.monsterprimary_22,
+			R.mipmap.monsterprimary_23,
+			R.mipmap.monsterprimary_24,
+			R.mipmap.monsterprimary_25,
+			R.mipmap.monsterprimary_26,
+			R.mipmap.monsterprimary_27,
+			R.mipmap.monsterprimary_28,
+			R.mipmap.monsterprimary_29,
+			R.mipmap.monsterprimary_30};
+
+	int[] mMonsterintermediate = new int[]{
+			R.mipmap.monsterintermediate_1,
+			R.mipmap.monsterintermediate_2,
+			R.mipmap.monsterintermediate_3,
+			R.mipmap.monsterintermediate_4,
+			R.mipmap.monsterintermediate_5,
+			R.mipmap.monsterintermediate_6,
+			R.mipmap.monsterintermediate_7};
+	int[] mMonsterBoss = new int[]{
+			R.mipmap.monsterboss_1,
+			R.mipmap.monsterboss_2};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -59,7 +93,7 @@ public class CameraViewActivity extends Activity implements
 		setupListeners();
 		setupLayout();
 		setAugmentedRealityPoint();
-
+		mMonsterprimary
 
 	}
 
