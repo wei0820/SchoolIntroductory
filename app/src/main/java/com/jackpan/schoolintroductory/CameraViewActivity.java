@@ -88,6 +88,8 @@ public class CameraViewActivity extends Activity implements
 			R.mipmap.monsterboss_1,
 			R.mipmap.monsterboss_2};
 	private TextView mHPTextView;
+	long hp ;
+	long attack = 1;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -188,7 +190,7 @@ public class CameraViewActivity extends Activity implements
 		mMyLongitude = location.getLongitude();
 		mAzimuthTeoretical = calculateTeoreticalAzimuth();
 //		Toast.makeText(this,"latitude: "+location.getLatitude()+" longitude: "+location.getLongitude(), Toast.LENGTH_SHORT).show();
-		updateDescription();
+//		updateDescription();
 		soundPool2.play(alertId2, 1.0F, 1.0F, 0, 0, 1.0F);
 
 	}
@@ -213,11 +215,30 @@ public class CameraViewActivity extends Activity implements
 		pointerIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+
+				hp = hp - attack;
+				Log.d(TAG, "onClick: "+attack);
+
+				Log.d(TAG, "onClick: "+hp);
+				mHPTextView.setText("HP:"+hp);
 				soundPool.play(alertId, 1.0F, 1.0F, 0, 0, 1.0F);
+				if (hp==0){
+					mHPTextView.setText("怪物已死亡");
+
+					Toast.makeText(CameraViewActivity.this,"擊敗怪物！！",Toast.LENGTH_SHORT).show();
+					try {
+						new Thread().sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					finish();
+				}else {
+
+				}
 
 			}
 		});
-		updateDescription();
+//		updateDescription();
 
 	}
 
@@ -254,52 +275,53 @@ public class CameraViewActivity extends Activity implements
 		int i = (int)(Math.random()* mMonsterprimary.length);
 		pointerIcon.setImageResource(mMonsterprimary[i]);
 		mHPTextView = findViewById(R.id.hp);
-		mHPTextView.setText("HP:30");
-//		mAnimation = AnimationUtils.loadAnimation(this,R.anim. balloonscale);
-//		pointerIcon.setAnimation(mAnimation );
-//		mAnimation.start();
+		hp = 30;
+		mHPTextView.setText("HP:"+hp);
+		mAnimation = AnimationUtils.loadAnimation(this,R.anim. balloonscale);
+		pointerIcon.setAnimation(mAnimation );
+		mAnimation.start();
 
-		TranslateAnimation animation = new TranslateAnimation(0,800,0,300);          //  new TranslateAnimation(xFrom,xTo, yFrom,yTo)
-		animation.setDuration(1000);  // animation duration
-//		animation.setRepeatCount(5);  // animation repeat count
-		animation.setRepeatCount(-1);   // repeat animation (left to right, right to left )
-		//移動效果
-		Animation amTranslate = new TranslateAnimation(0.0f, 100.0f, 0.0f, 100.0f);
-		//setDuration (long durationMillis) 設定動畫開始到結束的執行時間
-		amTranslate.setDuration(2000);
-		//setRepeatCount (int repeatCount) 設定重複次數 -1為無限次數 0
-		amTranslate.setRepeatCount(-1);
-
-		//旋轉效果
-		Animation amRotate = new RotateAnimation(0.0f, 360.0f, 0.0f, 100.0f);
-		//setDuration (long durationMillis) 設定動畫開始到結束的執行時間
-		amRotate.setDuration(2000);
-		//setRepeatCount (int repeatCount) 設定重複次數 -1為無限次數 0
-		amRotate.setRepeatCount(-1);
-
-		//放大縮小效果
-		Animation amScale = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f);
-		//setDuration (long durationMillis) 設定動畫開始到結束的執行時間
-		amRotate.setDuration(2000);
-		//setRepeatCount (int repeatCount) 設定重複次數 -1為無限次數 0
-		amRotate.setRepeatCount(-1);
-
-		//淡進淡出效果
-		Animation amAlpha = new AlphaAnimation(1.0f, 0.0f);
-		//setDuration (long durationMillis) 設定動畫開始到結束的執行時間
-		amAlpha.setDuration(2000);
-		//setRepeatCount (int repeatCount) 設定重複次數 -1為無限次數 0
-		amAlpha.setRepeatCount(-1);
-
-		//特效組合
-		AnimationSet amSet = new AnimationSet(false);
-		amSet.addAnimation(animation);
-//		amSet.addAnimation(amRotate);
-		amSet.addAnimation(amScale);
-		amSet.addAnimation(amAlpha);
+//		TranslateAnimation animation = new TranslateAnimation(0,800,0,300);          //  new TranslateAnimation(xFrom,xTo, yFrom,yTo)
+//		animation.setDuration(1000);  // animation duration
+////		animation.setRepeatCount(5);  // animation repeat count
+//		animation.setRepeatCount(-1);   // repeat animation (left to right, right to left )
+//		//移動效果
+//		Animation amTranslate = new TranslateAnimation(0.0f, 100.0f, 0.0f, 100.0f);
+//		//setDuration (long durationMillis) 設定動畫開始到結束的執行時間
+//		amTranslate.setDuration(2000);
+//		//setRepeatCount (int repeatCount) 設定重複次數 -1為無限次數 0
+//		amTranslate.setRepeatCount(-1);
+//
+//		//旋轉效果
+//		Animation amRotate = new RotateAnimation(0.0f, 360.0f, 0.0f, 100.0f);
+//		//setDuration (long durationMillis) 設定動畫開始到結束的執行時間
+//		amRotate.setDuration(2000);
+//		//setRepeatCount (int repeatCount) 設定重複次數 -1為無限次數 0
+//		amRotate.setRepeatCount(-1);
+//
+//		//放大縮小效果
+//		Animation amScale = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f);
+//		//setDuration (long durationMillis) 設定動畫開始到結束的執行時間
+//		amRotate.setDuration(2000);
+//		//setRepeatCount (int repeatCount) 設定重複次數 -1為無限次數 0
+//		amRotate.setRepeatCount(-1);
+//
+//		//淡進淡出效果
+//		Animation amAlpha = new AlphaAnimation(1.0f, 0.0f);
+//		//setDuration (long durationMillis) 設定動畫開始到結束的執行時間
+//		amAlpha.setDuration(2000);
+//		//setRepeatCount (int repeatCount) 設定重複次數 -1為無限次數 0
+//		amAlpha.setRepeatCount(-1);
+//
+//		//特效組合
+//		AnimationSet amSet = new AnimationSet(false);
+//		amSet.addAnimation(animation);
+////		amSet.addAnimation(amRotate);
+//		amSet.addAnimation(amScale);
+//		amSet.addAnimation(amAlpha);
 
 		//將動畫參數設定到圖片並開始執行動畫
-		pointerIcon.startAnimation(amSet);
+//		pointerIcon.startAnimation(amSet);
 		new CountDownTimer(20000,1000){
 
 			@Override
@@ -309,7 +331,7 @@ public class CameraViewActivity extends Activity implements
 
 			@Override
 			public void onTick(long millisUntilFinished) {
-				mTimeText.setText(""+millisUntilFinished/1000);
+				mTimeText.setText("00:"+millisUntilFinished/1000);
 			}
 
 		}.start();
