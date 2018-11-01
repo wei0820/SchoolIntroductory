@@ -128,7 +128,7 @@ public class CameraViewActivity extends Activity implements
 		} else if (dX < 0 && dY > 0) { // II
 			return azimuth = 180 - phiAngle;
 		} else if (dX < 0 && dY < 0) { // III
-			return azimuth = 180 + phiAngle;
+			return azimuth = 180 + phiAngle;x
 		} else if (dX > 0 && dY < 0) { // IV
 			return azimuth = 360 - phiAngle;
 		}
