@@ -87,7 +87,7 @@ public class CameraViewActivity extends Activity implements
 	int[] mMonsterBoss = new int[]{
 			R.mipmap.monsterboss_1,
 			R.mipmap.monsterboss_2};
-
+	private TextView mHPTextView;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -128,7 +128,7 @@ public class CameraViewActivity extends Activity implements
 		} else if (dX < 0 && dY > 0) { // II
 			return azimuth = 180 - phiAngle;
 		} else if (dX < 0 && dY < 0) { // III
-			return azimuth = 180 + phiAngle;x
+			return azimuth = 180 + phiAngle;
 		} else if (dX > 0 && dY < 0) { // IV
 			return azimuth = 360 - phiAngle;
 		}
@@ -187,7 +187,7 @@ public class CameraViewActivity extends Activity implements
 		mMyLatitude = location.getLatitude();
 		mMyLongitude = location.getLongitude();
 		mAzimuthTeoretical = calculateTeoreticalAzimuth();
-		Toast.makeText(this,"latitude: "+location.getLatitude()+" longitude: "+location.getLongitude(), Toast.LENGTH_SHORT).show();
+//		Toast.makeText(this,"latitude: "+location.getLatitude()+" longitude: "+location.getLongitude(), Toast.LENGTH_SHORT).show();
 		updateDescription();
 		soundPool2.play(alertId2, 1.0F, 1.0F, 0, 0, 1.0F);
 
@@ -253,7 +253,8 @@ public class CameraViewActivity extends Activity implements
 		pointerIcon = (ImageView) findViewById(R.id.icon);
 		int i = (int)(Math.random()* mMonsterprimary.length);
 		pointerIcon.setImageResource(mMonsterprimary[i]);
-
+		mHPTextView = findViewById(R.id.hp);
+		mHPTextView.setText("HP:30");
 //		mAnimation = AnimationUtils.loadAnimation(this,R.anim. balloonscale);
 //		pointerIcon.setAnimation(mAnimation );
 //		mAnimation.start();
