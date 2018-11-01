@@ -51,6 +51,7 @@ public class CameraViewActivity extends Activity implements
 	TextView descriptionTextView;
 	ImageView pointerIcon;
 	TextView mTimeText;
+	ImageView mAttackImg ;
 	private SoundPool soundPool,soundPool2;
 	private int alertId,alertId2;
 	int[] mMonsterprimary = new int[]{
@@ -90,6 +91,7 @@ public class CameraViewActivity extends Activity implements
 	private TextView mHPTextView;
 	long hp ;
 	long attack = 1;
+	long time;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -215,8 +217,9 @@ public class CameraViewActivity extends Activity implements
 		pointerIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+				mAttackImg.setVisibility(View.VISIBLE);
 				hp = hp - attack;
+				Log.d(TAG, "onClick: "+time);
 				Log.d(TAG, "onClick: "+attack);
 
 				Log.d(TAG, "onClick: "+hp);
@@ -236,6 +239,12 @@ public class CameraViewActivity extends Activity implements
 
 				}
 
+			}
+		});
+		mAttackImg.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mAttackImg.setVisibility(View.INVISIBLE);
 			}
 		});
 //		updateDescription();
@@ -273,6 +282,7 @@ public class CameraViewActivity extends Activity implements
 		mTimeText =findViewById(R.id.time);
 		pointerIcon = (ImageView) findViewById(R.id.icon);
 		int i = (int)(Math.random()* mMonsterprimary.length);
+		mAttackImg = findViewById(R.id.attack);
 		pointerIcon.setImageResource(mMonsterprimary[i]);
 		mHPTextView = findViewById(R.id.hp);
 		hp = 30;
@@ -332,6 +342,7 @@ public class CameraViewActivity extends Activity implements
 			@Override
 			public void onTick(long millisUntilFinished) {
 				mTimeText.setText("00:"+millisUntilFinished/1000);
+				time = millisUntilFinished/1000;
 			}
 
 		}.start();

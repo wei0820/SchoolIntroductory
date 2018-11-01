@@ -34,14 +34,25 @@
         android:layout_height="wrap_content"
         android:text="00:00" />
 
-    <ImageView
-        android:id="@+id/icon"
+    <RelativeLayout
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:src="@mipmap/ic_launcher"
-        android:visibility="invisible" />
+        >
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@mipmap/ic_launcher"
+            android:visibility="visible" />
+        <ImageView
+            android:id="@+id/attack"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@mipmap/attackicon"
+            android:visibility="invisible" />
+    </RelativeLayout>
 
     <TextView
         android:visibility="gone"
