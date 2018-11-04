@@ -101,8 +101,6 @@ public class CameraViewActivity extends Activity implements
 		alertId2 = soundPool2.load(this, R.raw.monster_roaning2, 1);
 		setupListeners();
 		setupLayout();
-		setAugmentedRealityPoint();
-
 	}
 
 	private void setAugmentedRealityPoint() {
@@ -159,16 +157,8 @@ public class CameraViewActivity extends Activity implements
 	}
 
 	private boolean isBetween(double minAngle, double maxAngle, double azimuth) {
-		//  minAngle = 73.34841807969889
-		//  maxAngle = 83.34841807969889
-		//  azimuth = 140.0
 
 		if (minAngle > maxAngle) {
-			Log.d(TAG, "Jack: "+"minAngle > maxAngle");
-			Log.d(TAG, "Jack: "+minAngle);
-			Log.d(TAG, "Jack: "+maxAngle);
-			Log.d(TAG, "Jack: "+azimuth);
-
 			if (isBetween(0, maxAngle, azimuth) && isBetween(minAngle, 360, azimuth))
 				return true;
 		} else {
@@ -191,8 +181,6 @@ public class CameraViewActivity extends Activity implements
 		mMyLatitude = location.getLatitude();
 		mMyLongitude = location.getLongitude();
 		mAzimuthTeoretical = calculateTeoreticalAzimuth();
-//		Toast.makeText(this,"latitude: "+location.getLatitude()+" longitude: "+location.getLongitude(), Toast.LENGTH_SHORT).show();
-//		updateDescription();
 		soundPool2.play(alertId2, 1.0F, 1.0F, 0, 0, 1.0F);
 
 	}
@@ -247,7 +235,6 @@ public class CameraViewActivity extends Activity implements
 				mAttackImg.setVisibility(View.INVISIBLE);
 			}
 		});
-//		updateDescription();
 
 	}
 
@@ -290,48 +277,6 @@ public class CameraViewActivity extends Activity implements
 		mAnimation = AnimationUtils.loadAnimation(this,R.anim. balloonscale);
 		pointerIcon.setAnimation(mAnimation );
 		mAnimation.start();
-
-//		TranslateAnimation animation = new TranslateAnimation(0,800,0,300);          //  new TranslateAnimation(xFrom,xTo, yFrom,yTo)
-//		animation.setDuration(1000);  // animation duration
-////		animation.setRepeatCount(5);  // animation repeat count
-//		animation.setRepeatCount(-1);   // repeat animation (left to right, right to left )
-//		//移動效果
-//		Animation amTranslate = new TranslateAnimation(0.0f, 100.0f, 0.0f, 100.0f);
-//		//setDuration (long durationMillis) 設定動畫開始到結束的執行時間
-//		amTranslate.setDuration(2000);
-//		//setRepeatCount (int repeatCount) 設定重複次數 -1為無限次數 0
-//		amTranslate.setRepeatCount(-1);
-//
-//		//旋轉效果
-//		Animation amRotate = new RotateAnimation(0.0f, 360.0f, 0.0f, 100.0f);
-//		//setDuration (long durationMillis) 設定動畫開始到結束的執行時間
-//		amRotate.setDuration(2000);
-//		//setRepeatCount (int repeatCount) 設定重複次數 -1為無限次數 0
-//		amRotate.setRepeatCount(-1);
-//
-//		//放大縮小效果
-//		Animation amScale = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f);
-//		//setDuration (long durationMillis) 設定動畫開始到結束的執行時間
-//		amRotate.setDuration(2000);
-//		//setRepeatCount (int repeatCount) 設定重複次數 -1為無限次數 0
-//		amRotate.setRepeatCount(-1);
-//
-//		//淡進淡出效果
-//		Animation amAlpha = new AlphaAnimation(1.0f, 0.0f);
-//		//setDuration (long durationMillis) 設定動畫開始到結束的執行時間
-//		amAlpha.setDuration(2000);
-//		//setRepeatCount (int repeatCount) 設定重複次數 -1為無限次數 0
-//		amAlpha.setRepeatCount(-1);
-//
-//		//特效組合
-//		AnimationSet amSet = new AnimationSet(false);
-//		amSet.addAnimation(animation);
-////		amSet.addAnimation(amRotate);
-//		amSet.addAnimation(amScale);
-//		amSet.addAnimation(amAlpha);
-
-		//將動畫參數設定到圖片並開始執行動畫
-//		pointerIcon.startAnimation(amSet);
 		new CountDownTimer(20000,1000){
 
 			@Override
