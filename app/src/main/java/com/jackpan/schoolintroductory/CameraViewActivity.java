@@ -212,6 +212,12 @@ public class CameraViewActivity extends Activity implements
 			mFireImg.setVisibility(View.VISIBLE);
 			mhp = mhp - mattck;
             HpTextView.setText("HP:"+mhp);
+            if (mhp==0){
+				HpTextView.setText("HP:0");
+
+				Toast.makeText(CameraViewActivity.this,"您輸了！！",Toast.LENGTH_SHORT).show();
+				finish();
+			}
 
 		}else {
 			mFireImg.setVisibility(View.GONE);
@@ -288,6 +294,7 @@ public class CameraViewActivity extends Activity implements
 		HpTextView = findViewById(R.id.mhp);
 		mFractiText = findViewById(R.id.fa);
 		mAttackImg = findViewById(R.id.attack);
+		mAttackImg.setVisibility(View.INVISIBLE);
 		pointerIcon.setImageResource(mMonsterprimary[i]);
 		mHPTextView = findViewById(R.id.hp);
 		hp = 30;
