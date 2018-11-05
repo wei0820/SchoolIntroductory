@@ -92,6 +92,7 @@ public class CameraViewActivity extends Activity implements
 	long hp ;
 	long attack = 1;
 	long time;
+	private ImageView mFireImg;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -101,6 +102,7 @@ public class CameraViewActivity extends Activity implements
 		alertId2 = soundPool2.load(this, R.raw.monster_roaning2, 1);
 		setupListeners();
 		setupLayout();
+		setAugmentedRealityPoint();
 	}
 
 	private void setAugmentedRealityPoint() {
@@ -192,15 +194,23 @@ public class CameraViewActivity extends Activity implements
 
 		double minAngle = calculateAzimuthAccuracy(mAzimuthTeoretical).get(0);
 		double maxAngle = calculateAzimuthAccuracy(mAzimuthTeoretical).get(1);
-		Log.d(TAG, "onAzimuthChanged: "+minAngle);
-		Log.d(TAG, "onAzimuthChanged: "+maxAngle);
-		Log.d(TAG, "onAzimuthChanged: "+mAzimuthReal);
-		Log.d(TAG, "onAzimuthChanged: "+(isBetween(minAngle, maxAngle, mAzimuthReal)));
 		if (isBetween(minAngle, maxAngle, mAzimuthReal)) {
 			pointerIcon.setVisibility(View.VISIBLE);
 
 		} else {
 			pointerIcon.setVisibility(View.INVISIBLE);
+		}
+
+		int fire = (int)(Math.random()* 49+1);
+		Log.d(TAG, "onAzimuthChanged: "+fire);
+		int fireran = fire%20;
+		Log.d(TAG, "onAzimuthChanged: "+fireran);
+
+		if (fireran==0){
+			mFireImg.setVisibility(View.VISIBLE);
+		}else {
+			mFireImg.setVisibility(View.GONE);
+
 		}
 		pointerIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -266,9 +276,11 @@ public class CameraViewActivity extends Activity implements
 	Animation mAnimation = null ;
 
 	private void setupLayout() {
+		mFireImg = findViewById(R.id.fireimg);
 		mTimeText =findViewById(R.id.time);
 		pointerIcon = (ImageView) findViewById(R.id.icon);
 		int i = (int)(Math.random()* mMonsterprimary.length);
+
 		mAttackImg = findViewById(R.id.attack);
 		pointerIcon.setImageResource(mMonsterprimary[i]);
 		mHPTextView = findViewById(R.id.hp);
