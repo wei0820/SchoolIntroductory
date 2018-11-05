@@ -89,10 +89,12 @@ public class CameraViewActivity extends Activity implements
 			R.mipmap.monsterboss_1,
 			R.mipmap.monsterboss_2};
 	private TextView mHPTextView;
-	long hp ;
-	long attack = 1;
+	long hp ,mhp;
+	long attack=1 ;
+	long mattck= 1;
 	long time;
 	private ImageView mFireImg;
+	private TextView HpTextView,mFractiText;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -208,6 +210,9 @@ public class CameraViewActivity extends Activity implements
 
 		if (fireran==0){
 			mFireImg.setVisibility(View.VISIBLE);
+			mhp = mhp - mattck;
+            HpTextView.setText("HP:"+mhp);
+
 		}else {
 			mFireImg.setVisibility(View.GONE);
 
@@ -280,12 +285,15 @@ public class CameraViewActivity extends Activity implements
 		mTimeText =findViewById(R.id.time);
 		pointerIcon = (ImageView) findViewById(R.id.icon);
 		int i = (int)(Math.random()* mMonsterprimary.length);
-
+		HpTextView = findViewById(R.id.mhp);
+		mFractiText = findViewById(R.id.fa);
 		mAttackImg = findViewById(R.id.attack);
 		pointerIcon.setImageResource(mMonsterprimary[i]);
 		mHPTextView = findViewById(R.id.hp);
 		hp = 30;
+		mhp = 100;
 		mHPTextView.setText("HP:"+hp);
+		HpTextView.setText("HP:"+mhp);
 		mAnimation = AnimationUtils.loadAnimation(this,R.anim. balloonscale);
 		pointerIcon.setAnimation(mAnimation );
 		mAnimation.start();
