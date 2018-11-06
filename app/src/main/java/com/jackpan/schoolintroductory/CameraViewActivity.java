@@ -308,7 +308,11 @@ public class CameraViewActivity extends Activity implements
 
 			@Override
 			public void onFinish() {
-				mTimeText.setText("Done!");
+				mTimeText.setText("時間結束!");
+				if(hp>0){
+					Toast.makeText(CameraViewActivity.this,"沒擊敗怪物 您輸了！！",Toast.LENGTH_SHORT).show();
+				}
+
 			}
 
 			@Override
