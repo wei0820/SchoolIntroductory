@@ -85,9 +85,10 @@ public class CameraViewActivity extends Activity implements
 			R.mipmap.monsterboss_2};
 	private TextView mHPTextView;
 	long hp ,mhp;
-	long attack=1 ;
+	long attack; ;
 	long mattck= 1;
 	long time;
+	long m_time ;
 	private ImageView mFireImg;
 	private TextView HpTextView,mFractiText;
 	@Override
@@ -282,21 +283,53 @@ public class CameraViewActivity extends Activity implements
 		mFireImg = findViewById(R.id.fireimg);
 		mTimeText =findViewById(R.id.time);
 		pointerIcon = (ImageView) findViewById(R.id.icon);
-		int i = (int)(Math.random()* mMonsterprimary.length);
 		HpTextView = findViewById(R.id.mhp);
 		mFractiText = findViewById(R.id.fa);
 		mAttackImg = findViewById(R.id.attack);
+		int mo = (int)(Math.random()*2);
+		int i;
+		switch (mo){
+			case 0:
+				hp = 30;
+				m_time = 30000;
+				attack = 1;
+				i = (int)(Math.random()* mMonsterprimary.length);
+				pointerIcon.setImageResource(mMonsterprimary[i]);
+				break;
+			case 1:
+				hp = 40;
+				m_time = 20000;
+				attack = 5;
+				i = (int)(Math.random()* mMonsterintermediate.length);
+				pointerIcon.setImageResource(mMonsterintermediate[i]);
+
+
+				break;
+			case 2:
+				hp = 50;
+				m_time = 10000;
+				attack = 10;
+				i = (int)(Math.random()* mMonsterBoss.length);
+				pointerIcon.setImageResource(mMonsterBoss[i]);
+				break;
+			default:
+				hp = 30;
+				m_time = 30000;
+
+				i = (int)(Math.random()* mMonsterprimary.length);
+				pointerIcon.setImageResource(mMonsterprimary[i]);
+				break;
+		}
 		mAttackImg.setVisibility(View.INVISIBLE);
-		pointerIcon.setImageResource(mMonsterprimary[i]);
+
 		mHPTextView = findViewById(R.id.hp);
-		hp = 30;
 		mhp = MySharedPreferncesHelp.getIsFraction(CameraViewActivity.this);
 		mHPTextView.setText("HP:"+hp);
 		HpTextView.setText("HP:"+mhp);
 		mAnimation = AnimationUtils.loadAnimation(this,R.anim. balloonscale);
 		pointerIcon.setAnimation(mAnimation );
 		mAnimation.start();
-		new CountDownTimer(20000,1000){
+		new CountDownTimer(m_time,1000){
 
 			@Override
 			public void onFinish() {
