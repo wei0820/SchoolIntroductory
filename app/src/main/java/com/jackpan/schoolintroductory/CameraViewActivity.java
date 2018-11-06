@@ -13,13 +13,8 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
-import android.view.animation.ScaleAnimation;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -298,7 +293,7 @@ public class CameraViewActivity extends Activity implements
 		pointerIcon.setImageResource(mMonsterprimary[i]);
 		mHPTextView = findViewById(R.id.hp);
 		hp = 30;
-		mhp = 100;
+		mhp = MySharedPreferncesHelp.getIsFraction(CameraViewActivity.this);
 		mHPTextView.setText("HP:"+hp);
 		HpTextView.setText("HP:"+mhp);
 		mAnimation = AnimationUtils.loadAnimation(this,R.anim. balloonscale);
@@ -311,6 +306,7 @@ public class CameraViewActivity extends Activity implements
 				mTimeText.setText("時間結束!");
 				if(hp>0){
 					Toast.makeText(CameraViewActivity.this,"沒擊敗怪物 您輸了！！",Toast.LENGTH_SHORT).show();
+					finish();
 				}
 
 			}

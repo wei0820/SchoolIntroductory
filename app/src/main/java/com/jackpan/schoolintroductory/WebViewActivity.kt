@@ -9,8 +9,6 @@ import android.util.Log
 import android.webkit.WebView
 import android.webkit.WebViewClient
 
-import kotlinx.android.synthetic.main.activity_web_view.*
-
 class WebViewActivity : AppCompatActivity() {
     lateinit var mContext: Context
     lateinit var mWebView: WebView

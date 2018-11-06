@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 
 
-object MySharedPrefernces {
+object  MySharedPrefernces {
     fun setList(context: Context,list :ArrayList<String>){
         val editor = context.getSharedPreferences("EnvironDataList", MODE_PRIVATE).edit()
         editor.putInt("EnvironNums", list.size)

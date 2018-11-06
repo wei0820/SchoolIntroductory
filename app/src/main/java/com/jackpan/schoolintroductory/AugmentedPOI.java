@@ -1,4 +1,9 @@
 package com.jackpan.schoolintroductory;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+
 /**
  * Created by krzysztofjackowski on 24/09/15.
  */
@@ -47,4 +52,5 @@ public class AugmentedPOI {
 	public void setPoiLongitude(double poiLongitude) {
 		this.mLongitude = poiLongitude;
 	}
+
 }
