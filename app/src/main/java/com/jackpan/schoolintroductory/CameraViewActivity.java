@@ -207,10 +207,9 @@ public class CameraViewActivity extends Activity implements
 			mFireImg.setVisibility(View.VISIBLE);
 			mhp = mhp - mattck;
             HpTextView.setText("HP:"+mhp);
-            MySharedPreferncesHelp.saveIsFraction(CameraViewActivity.this,mhp);
             if (mhp==0){
 				HpTextView.setText("HP:0");
-
+				MySharedPreferncesHelp.saveIsFraction(CameraViewActivity.this,mhp);
 				Toast.makeText(CameraViewActivity.this,"您輸了！！",Toast.LENGTH_SHORT).show();
 				finish();
 			}
@@ -224,18 +223,15 @@ public class CameraViewActivity extends Activity implements
 			public void onClick(View v) {
 				mAttackImg.setVisibility(View.VISIBLE);
 				hp = hp - attack;
-				Log.d(TAG, "onClick: "+time);
-				Log.d(TAG, "onClick: "+attack);
-
-				Log.d(TAG, "onClick: "+hp);
+				mhp = mhp + attack;
 				mHPTextView.setText("HP:"+hp);
 				soundPool.play(alertId, 1.0F, 1.0F, 0, 0, 1.0F);
 				if (hp==0){
 					mHPTextView.setText("怪物已死亡");
-
+					MySharedPreferncesHelp.saveIsFraction(CameraViewActivity.this,mhp);
 					Toast.makeText(CameraViewActivity.this,"擊敗怪物！！",Toast.LENGTH_SHORT).show();
 					try {
-						new Thread().sleep(1000);
+						new Thread().sleep(500);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
