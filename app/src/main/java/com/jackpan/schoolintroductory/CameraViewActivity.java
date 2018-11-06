@@ -228,13 +228,13 @@ public class CameraViewActivity extends Activity implements
 				soundPool.play(alertId, 1.0F, 1.0F, 0, 0, 1.0F);
 				if (hp==0){
 					mHPTextView.setText("怪物已死亡");
-					MySharedPreferncesHelp.saveIsFraction(CameraViewActivity.this,mhp);
 					Toast.makeText(CameraViewActivity.this,"擊敗怪物！！",Toast.LENGTH_SHORT).show();
 					try {
 						new Thread().sleep(500);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+					MySharedPreferncesHelp.saveIsFraction(CameraViewActivity.this,mhp);
 					finish();
 				}else {
 
