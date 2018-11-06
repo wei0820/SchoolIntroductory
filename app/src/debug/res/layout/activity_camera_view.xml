@@ -35,16 +35,15 @@
         android:text="00:00" />
 
     <TextView
+        android:visibility="invisible"
         android:id="@+id/fa"
-        android:layout_marginBottom="20dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:textColor="#00BBFf"
-        android:layout_marginLeft="20dp"
-        android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="分數" />
+        android:layout_alignTop="@+id/time"
+        android:layout_centerHorizontal="true"
+        android:text="分數"
+        android:textColor="#00BBFf"
+        android:textSize="20dp" />
     <TextView
         android:textColor="#ff0000"
         android:layout_alignParentLeft="true"

@@ -207,6 +207,7 @@ public class CameraViewActivity extends Activity implements
 			mFireImg.setVisibility(View.VISIBLE);
 			mhp = mhp - mattck;
             HpTextView.setText("HP:"+mhp);
+            MySharedPreferncesHelp.saveIsFraction(CameraViewActivity.this,mhp);
             if (mhp==0){
 				HpTextView.setText("HP:0");
 
