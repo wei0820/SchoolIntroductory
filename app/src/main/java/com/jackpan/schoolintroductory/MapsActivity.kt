@@ -139,8 +139,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
 
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
-            Log.d("Location", location.latitude.toString())
-            Log.d("Location", location.longitude.toString())
             mLat= location.latitude
             mLon =location.longitude
             var latlon: String = location.latitude.toString() + "," + location.longitude.toString()
@@ -169,6 +167,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
 //                "距離"+Distance(mLat,mLon,marker.position.latitude,marker.position.longitude)+
 //                        "公尺",Toast.LENGTH_SHORT).show()
        val  intent = Intent()
+        var bundle = Bundle()
+        bundle.putDouble("latitude",marker.position.latitude)
+        bundle.putDouble("longitude",marker.position.longitude)
+        intent.putExtras(bundle)
         intent.setClass(this@MapsActivity,CameraViewActivity::class.java)
         startActivity(intent)
         true
