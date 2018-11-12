@@ -207,25 +207,23 @@ public class CameraViewActivity extends Activity implements
 		}
 
 		int fire = (int)(Math.random()* 49+1);
-		Log.d(TAG, "onAzimuthChanged: "+fire);
 		int fireran = fire%20;
-		Log.d(TAG, "onAzimuthChanged: "+fireran);
 
-		if (fireran==0){
-			mFireImg.setVisibility(View.VISIBLE);
-			mhp = mhp - mattck;
-			HpTextView.setText("HP:"+mhp);
-			if (mhp==0){
-				HpTextView.setText("HP:0");
-				MySharedPreferncesHelp.saveIsFraction(CameraViewActivity.this,mhp);
-				Toast.makeText(CameraViewActivity.this,"您輸了！！",Toast.LENGTH_SHORT).show();
-				finish();
-			}
-
-		}else {
-			mFireImg.setVisibility(View.GONE);
-
-		}
+//		if (fireran==0){
+//			mFireImg.setVisibility(View.VISIBLE);
+//			mhp = mhp - mattck;
+//			HpTextView.setText("HP:"+mhp);
+//			if (mhp==0){
+//				HpTextView.setText("HP:0");
+//				MySharedPreferncesHelp.saveIsFraction(CameraViewActivity.this,mhp);
+//				Toast.makeText(CameraViewActivity.this,"您輸了！！",Toast.LENGTH_SHORT).show();
+//				finish();
+//			}
+//
+//		}else {
+//			mFireImg.setVisibility(View.GONE);
+//
+//		}
 		pointerIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
