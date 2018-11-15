@@ -86,8 +86,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
         mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE)
         mLatLngArray.forEach {
             addMarker(it,
-                    "test",
-                    "test")
+                    "發現怪物",
+                    "點擊進戰鬥")
         }
 
 
