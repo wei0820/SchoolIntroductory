@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomePageActivity"
+    android:background="@mipmap/home">
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="導覽"
+        ></Button>
+
+    <Button
+        android:layout_below="@id/button1"
+        android:id="@+id/button2"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="足跡"
+        ></Button>
+    <Button
+        android:layout_below="@id/button2"
+        android:id="@+id/button3"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+       android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="搜尋"
+        ></Button>
+    <Button
+        android:id="@+id/button4"
+        android:layout_below="@id/button3"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="訊息"
+        ></Button>
+</RelativeLayout>
