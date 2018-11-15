@@ -268,7 +268,10 @@ public class CameraViewActivity extends Activity implements
 		super.onResume();
 		myCurrentAzimuth.start();
 		myCurrentLocation.start();
-	}
+        soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 5);
+        alertId = soundPool.load(this, R.raw.middle_punch1, 1);
+
+    }
 
 	private void setupListeners() {
 		myCurrentLocation = new MyCurrentLocation(this);
