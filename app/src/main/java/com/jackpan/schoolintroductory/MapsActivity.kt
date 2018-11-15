@@ -85,8 +85,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
         mMap.setMaxZoomPreference(20.0f)
         mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE)
         mLatLngArray.forEach {
+            val mo = (Math.random() * 2).toInt()
+            var title :String = ""
+            when(mo){
+                0 ->{
+                    title ="初級怪物"
+                }
+                1 ->{
+                    title ="中級怪物"
+
+                }
+                2 ->{
+                    title ="BOSS級怪物"
+
+                }
+
+            }
             addMarker(it,
-                    "發現怪物",
+                    title,
                     "點擊進戰鬥")
         }
 
@@ -173,6 +189,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
             var bundle = Bundle()
             bundle.putDouble("latitude",marker.position.latitude)
             bundle.putDouble("longitude",marker.position.longitude)
+            bundle.putString("title",marker.title)
             intent.putExtras(bundle)
             intent.setClass(this@MapsActivity,CameraViewActivity::class.java)
             startActivity(intent)
