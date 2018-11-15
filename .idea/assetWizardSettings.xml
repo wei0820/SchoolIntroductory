@@ -23,6 +23,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
+                                                <entry key="color" value="4eff44" />
                                                 <entry key="paddingPercent" value="10" />
                                               </map>
                                             </option>
@@ -44,9 +45,8 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="cropped" value="true" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="outputName" value="map_icon_black" />
+                                      <entry key="outputName" value="map_icon_green" />
                                     </map>
                                   </option>
                                 </PersistentState>

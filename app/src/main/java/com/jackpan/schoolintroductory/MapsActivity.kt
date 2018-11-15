@@ -45,7 +45,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
     var mLat :Double = 0.0
     var mLon :Double = 0.0
     var mLatLngArray = ArrayList<LatLng>()
-
+     var num :Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
@@ -85,25 +85,31 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
         mMap.setMaxZoomPreference(20.0f)
         mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE)
         mLatLngArray.forEach {
-            val mo = (Math.random() * 2).toInt()
+            val mo = (Math.random() * 3).toInt()
+
             var title :String = ""
+            var icon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.mipmap.map_icon_black)
+            Log.d("Jack",mo.toString())
             when(mo){
                 0 ->{
                     title ="初級怪物"
+                    icon = BitmapDescriptorFactory.fromResource(R.mipmap.map_icon_black)
                 }
                 1 ->{
                     title ="中級怪物"
+                    icon = BitmapDescriptorFactory.fromResource(R.mipmap.map_icon_green)
 
                 }
                 2 ->{
                     title ="BOSS級怪物"
+                    icon = BitmapDescriptorFactory.fromResource(R.mipmap.map_icon_red)
 
                 }
 
             }
             addMarker(it,
                     title,
-                    "點擊進戰鬥")
+                    "點擊進戰鬥",icon)
         }
 
 
@@ -142,8 +148,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
         }
     }
     // 在地圖加入指定位置與標題的標記
-    private fun addMarker(place: LatLng, title: String, context: String) {
-        var icon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.mipmap.map_icon_black)
+    private fun addMarker(place: LatLng, title: String, context: String,icon:BitmapDescriptor) {
         val markerOptions = MarkerOptions()
         markerOptions.position(place)
                 .title(title)
@@ -173,6 +178,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
     }
 
     // 按下標記觸發 OnMarkerClick 事件
+
     private val gmapListener = GoogleMap.OnMarkerClickListener { marker ->
         marker.showInfoWindow()
         // 用吐司顯示註解
@@ -182,14 +188,28 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
 //        Toast.makeText(this@MapsActivity,
 //                "距離"+Distance(mLat,mLon,marker.position.latitude,marker.position.longitude)+
 //                        "公尺",Toast.LENGTH_SHORT).show()
-        if(Distance(mLat,mLon,marker.position.latitude,marker.position.longitude)>300){
+        if(Distance(mLat,mLon,marker.position.latitude,marker.position.longitude)>30000000){
             Toast.makeText(this@MapsActivity,"距離太遠了！請再近一點唷！",Toast.LENGTH_SHORT).show()
         }else{
+
+            when(marker.title){
+                "初級怪物"->{
+                    num = 0
+                }
+                "中級怪物"->{
+                    num = 1
+
+                }
+                "BOSS級怪物" ->{
+                    num = 2
+
+                }
+            }
             val  intent = Intent()
             var bundle = Bundle()
             bundle.putDouble("latitude",marker.position.latitude)
             bundle.putDouble("longitude",marker.position.longitude)
-            bundle.putString("title",marker.title)
+            bundle.putInt("num",num)
             intent.putExtras(bundle)
             intent.setClass(this@MapsActivity,CameraViewActivity::class.java)
             startActivity(intent)

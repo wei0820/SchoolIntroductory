@@ -286,10 +286,13 @@ public class CameraViewActivity extends Activity implements
 		HpTextView = findViewById(R.id.mhp);
 		mFractiText = findViewById(R.id.fa);
 		mAttackImg = findViewById(R.id.attack);
-		int mo = (int)(Math.random()*2);
+        mHPTextView = findViewById(R.id.hp);
+		int mo = getIntent().getExtras().getInt("num");
+		Log.d(TAG, "setupLayout: "+mo);
 		int i;
 		switch (mo){
 			case 0:
+				mFractiText.setText("初級怪物");
 				hp = 30;
 				m_time = 30000;
 				attack = 1;
@@ -297,6 +300,8 @@ public class CameraViewActivity extends Activity implements
 				pointerIcon.setImageResource(mMonsterprimary[i]);
 				break;
 			case 1:
+				mFractiText.setText("中級怪物");
+
 				hp = 40;
 				m_time = 20000;
 				attack = 5;
@@ -306,6 +311,7 @@ public class CameraViewActivity extends Activity implements
 
 				break;
 			case 2:
+				mFractiText.setText("BOSS級怪物");
 				hp = 50;
 				m_time = 10000;
 				attack = 10;
@@ -313,6 +319,8 @@ public class CameraViewActivity extends Activity implements
 				pointerIcon.setImageResource(mMonsterBoss[i]);
 				break;
 			default:
+				mFractiText.setText("初級怪物");
+
 				hp = 30;
 				m_time = 30000;
 
@@ -322,7 +330,6 @@ public class CameraViewActivity extends Activity implements
 		}
 		mAttackImg.setVisibility(View.INVISIBLE);
 
-		mHPTextView = findViewById(R.id.hp);
 		mhp = MySharedPreferncesHelp.getIsFraction(CameraViewActivity.this);
 		mHPTextView.setText("HP:"+hp);
 		HpTextView.setText("HP:"+mhp);
