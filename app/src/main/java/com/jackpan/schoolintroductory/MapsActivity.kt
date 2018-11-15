@@ -188,7 +188,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
 //        Toast.makeText(this@MapsActivity,
 //                "距離"+Distance(mLat,mLon,marker.position.latitude,marker.position.longitude)+
 //                        "公尺",Toast.LENGTH_SHORT).show()
-        if(Distance(mLat,mLon,marker.position.latitude,marker.position.longitude)>30000000){
+        if(Distance(mLat,mLon,marker.position.latitude,marker.position.longitude)>300){
             Toast.makeText(this@MapsActivity,"距離太遠了！請再近一點唷！",Toast.LENGTH_SHORT).show()
         }else{
 
