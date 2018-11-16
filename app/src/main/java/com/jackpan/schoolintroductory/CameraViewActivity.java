@@ -91,7 +91,7 @@ public class CameraViewActivity extends Activity implements
 	long m_time ;
 	private ImageView mFireImg;
 	private TextView HpTextView,mFractiText;
-
+	private boolean isAppear = false;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -201,13 +201,14 @@ public class CameraViewActivity extends Activity implements
 		double maxAngle = calculateAzimuthAccuracy(mAzimuthTeoretical).get(1);
 		if (isBetween(minAngle, maxAngle, mAzimuthReal)) {
 			pointerIcon.setVisibility(View.VISIBLE);
+			isAppear = true;
 
 		} else {
 			pointerIcon.setVisibility(View.INVISIBLE);
 		}
 
-		int fire = (int)(Math.random()* 49+1);
-		int fireran = fire%20;
+//		int fire = (int)(Math.random()* 49+1);
+//		int fireran = fire%20;
 
 //		if (fireran==0){
 //			mFireImg.setVisibility(View.VISIBLE);
@@ -224,36 +225,36 @@ public class CameraViewActivity extends Activity implements
 //			mFireImg.setVisibility(View.GONE);
 //
 //		}
-		pointerIcon.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mAttackImg.setVisibility(View.VISIBLE);
-				hp = hp - attack;
-				mhp = mhp + attack;
-				mHPTextView.setText("HP:"+hp);
-				soundPool.play(alertId, 1.0F, 1.0F, 0, 0, 1.0F);
-				if (hp==0){
-					mHPTextView.setText("怪物已死亡");
-					Toast.makeText(CameraViewActivity.this,"擊敗怪物！！",Toast.LENGTH_SHORT).show();
-					try {
-						new Thread().sleep(500);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					MySharedPreferncesHelp.saveIsFraction(CameraViewActivity.this,mhp);
-					finish();
-				}else {
-
-				}
-
-			}
-		});
-		mAttackImg.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mAttackImg.setVisibility(View.INVISIBLE);
-			}
-		});
+//		pointerIcon.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				mAttackImg.setVisibility(View.VISIBLE);
+//				hp = hp - attack;
+//				mhp = mhp + attack;
+//				mHPTextView.setText("HP:"+hp);
+//				soundPool.play(alertId, 1.0F, 1.0F, 0, 0, 1.0F);
+//				if (hp==0){
+//					mHPTextView.setText("怪物已死亡");
+//					Toast.makeText(CameraViewActivity.this,"擊敗怪物！！",Toast.LENGTH_SHORT).show();
+//					try {
+//						new Thread().sleep(500);
+//					} catch (InterruptedException e) {
+//						e.printStackTrace();
+//					}
+//					MySharedPreferncesHelp.saveIsFraction(CameraViewActivity.this,mhp);
+//					finish();
+//				}else {
+//
+//				}
+//
+//			}
+//		});
+//		mAttackImg.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				mAttackImg.setVisibility(View.INVISIBLE);
+//			}
+//		});
 	}
 
 	@Override
@@ -283,6 +284,7 @@ public class CameraViewActivity extends Activity implements
 	}
 
 	private void setupLayout() {
+
 		mFireImg = findViewById(R.id.fireimg);
 		mTimeText =findViewById(R.id.time);
 		pointerIcon = (ImageView) findViewById(R.id.icon);
@@ -290,15 +292,14 @@ public class CameraViewActivity extends Activity implements
 		mFractiText = findViewById(R.id.fa);
 		mAttackImg = findViewById(R.id.attack);
         mHPTextView = findViewById(R.id.hp);
+		mHPTextView.setText("分數:"+hp);
 		int mo = getIntent().getExtras().getInt("num");
-		Log.d(TAG, "setupLayout: "+mo);
 		int i;
 		switch (mo){
 			case 0:
 				mFractiText.setText("初級怪物");
 				hp = 30;
 				m_time = 30000;
-				attack = 1;
 				i = (int)(Math.random()* mMonsterprimary.length);
 				pointerIcon.setImageResource(mMonsterprimary[i]);
 				break;
@@ -307,7 +308,6 @@ public class CameraViewActivity extends Activity implements
 
 				hp = 40;
 				m_time = 20000;
-				attack = 5;
 				i = (int)(Math.random()* mMonsterintermediate.length);
 				pointerIcon.setImageResource(mMonsterintermediate[i]);
 
@@ -317,34 +317,35 @@ public class CameraViewActivity extends Activity implements
 				mFractiText.setText("BOSS級怪物");
 				hp = 50;
 				m_time = 10000;
-				attack = 10;
 				i = (int)(Math.random()* mMonsterBoss.length);
 				pointerIcon.setImageResource(mMonsterBoss[i]);
 				break;
 			default:
 				mFractiText.setText("初級怪物");
-
 				hp = 30;
 				m_time = 30000;
-
 				i = (int)(Math.random()* mMonsterprimary.length);
 				pointerIcon.setImageResource(mMonsterprimary[i]);
 				break;
 		}
-		mAttackImg.setVisibility(View.INVISIBLE);
+//		mAttackImg.setVisibility(View.INVISIBLE);
 
-		mhp = MySharedPreferncesHelp.getIsFraction(CameraViewActivity.this);
-		mHPTextView.setText("HP:"+hp);
-		HpTextView.setText("HP:"+mhp);
+
+//		HpTextView.setText("HP:"+mhp);
 		new CountDownTimer(m_time,1000){
 
 			@Override
 			public void onFinish() {
 				mTimeText.setText("時間結束!");
-				if(hp>0){
-					Toast.makeText(CameraViewActivity.this,"沒擊敗怪物 您輸了！！",Toast.LENGTH_SHORT).show();
+				if (!isAppear){
+					Toast.makeText(CameraViewActivity.this,"沒發現怪物 您輸了！！",Toast.LENGTH_SHORT).show();
+					finish();
+				}else {
+					MySharedPreferncesHelp.saveIsFraction(CameraViewActivity.this,hp);
+					Toast.makeText(CameraViewActivity.this,"恭喜您找到怪物",Toast.LENGTH_SHORT).show();
 					finish();
 				}
+
 
 			}
 
