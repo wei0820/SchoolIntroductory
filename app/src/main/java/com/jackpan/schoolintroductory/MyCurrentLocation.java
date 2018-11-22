@@ -15,7 +15,7 @@ import com.google.android.gms.location.LocationServices;
  * Created by krzysztofjackowski on 24/09/15.
  */
 public class MyCurrentLocation implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
-
+    // 這邊是 ar 相關的 第三方 套件
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
     private LocationRequest mLocationRequest;

@@ -7,13 +7,14 @@ import android.content.SharedPreferences;
 /**
  * Created by krzysztofjackowski on 24/09/15.
  */
+
 public class AugmentedPOI {
 	private int mId;
 	private String mName;
 	private String mDescription;
 	private double mLatitude;
 	private double mLongitude;
-	
+	//  設定 怪物 顯示方式 路徑 經緯度 名稱
 	public AugmentedPOI(String newName, String newDescription,
                         double newLatitude, double newLongitude) {
 		this.mName = newName;
@@ -21,36 +22,17 @@ public class AugmentedPOI {
         this.mLatitude = newLatitude;
         this.mLongitude = newLongitude;
 	}
-	
-	public int getPoiId() {
-		return mId;
-	}
-	public void setPoiId(int poiId) {
-		this.mId = poiId;
-	}
+	//取名字
 	public String getPoiName() {
 		return mName;
 	}
-	public void setPoiName(String poiName) {
-		this.mName = poiName;
-	}
-	public String getPoiDescription() {
-		return mDescription;
-	}
-	public void setPoiDescription(String poiDescription) {
-		this.mDescription = poiDescription;
-	}
+	//取經緯度
 	public double getPoiLatitude() {
 		return mLatitude;
-	}
-	public void setPoiLatitude(double poiLatitude) {
-		this.mLatitude = poiLatitude;
 	}
 	public double getPoiLongitude() {
 		return mLongitude;
 	}
-	public void setPoiLongitude(double poiLongitude) {
-		this.mLongitude = poiLongitude;
-	}
+
 
 }

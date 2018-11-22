@@ -5,6 +5,8 @@ import android.content.Context.MODE_PRIVATE
 
 
 object  MySharedPrefernces {
+    // 儲存搜尋紀錄
+
     fun setList(context: Context,list :ArrayList<String>){
         val editor = context.getSharedPreferences("EnvironDataList", MODE_PRIVATE).edit()
         editor.putInt("EnvironNums", list.size)
@@ -13,6 +15,8 @@ object  MySharedPrefernces {
         }
         editor.commit()
     }
+    // 取得搜尋紀錄
+
     fun  getList(context: Context):ArrayList<String>{
         val environmentList = ArrayList<String>()
         val preferDataList = context.getSharedPreferences("EnvironDataList", MODE_PRIVATE)

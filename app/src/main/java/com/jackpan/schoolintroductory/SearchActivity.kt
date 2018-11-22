@@ -34,6 +34,8 @@ class SearchActivity : AppCompatActivity() {
             Log.d("myTag", "Security Exception, no location available")
         }
         mListView = findViewById(R.id.listview)
+        // 設定 資訊
+
         TitleArray = arrayListOf(
                 "汽車停車場-中正大樓 B1、B2",
                 "汽車停車場-中商大樓 B1、B2",
@@ -44,6 +46,8 @@ class SearchActivity : AppCompatActivity() {
                 "機車停車場-資訊管 B1",
                 "機車停車場-中技大樓1F",
                 "機車停車場-民生校區校園廣場")
+        // 資訊經緯度
+
         latlonArray = arrayListOf(
                 "24.149652,120.682987",
                 "24.151357,120.682503"
@@ -61,6 +65,8 @@ class SearchActivity : AppCompatActivity() {
             setTime(TitleArray.get(position).toString())
         }
     }
+    // 設定時間
+
     fun setTime(name:String){
         val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         val curDate = Date(System.currentTimeMillis()) // 獲取當前時間
@@ -69,6 +75,7 @@ class SearchActivity : AppCompatActivity() {
         arrayList.add(str)
         MySharedPrefernces.setList(this,arrayList)
     }
+    // 跳轉地圖
 
     fun goToMap(nowAdd :String,GotoAdd:String){
         val vDirectionUrl = ("https://maps.google.com/maps?f=d"

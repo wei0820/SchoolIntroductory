@@ -9,6 +9,8 @@ import android.hardware.SensorManager;
 /**
  * Created by krzysztofjackowski on 24/09/15.
  */
+// 這邊是 ar 相關的 第三方 套件
+
 public class MyCurrentAzimuth implements SensorEventListener {
 
     private SensorManager sensorManager;

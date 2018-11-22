@@ -17,6 +17,8 @@ class MessageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_message)
         mListView = findViewById(R.id.listview)
+        // 各學院列表
+
         TitleArray = arrayListOf("國立台中科技大學", "國立台中科技大學-資訊管理系",
                 "台中科技大學-進修部",
                 "台中科技大學-進修學院",
@@ -35,6 +37,8 @@ class MessageActivity : AppCompatActivity() {
                 "資訊與流通學院",
                 "中護健康學院",
                 "語文學院")
+        // 各學院經緯度列表
+
         UrlArray = arrayListOf("https://www.nutc.edu.tw/bin/home.php",
                 "https://im.nutc.edu.tw/bin/home.php",
                 "https://nd.nutc.edu.tw/bin/home.php",

@@ -24,7 +24,7 @@
 
 
     <TextView
-
+        android:visibility="gone"
         android:id="@+id/mhp"
         android:layout_above="@+id/hp"
         android:textColor="#00BBFf"

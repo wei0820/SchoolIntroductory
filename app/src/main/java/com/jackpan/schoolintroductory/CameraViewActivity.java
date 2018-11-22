@@ -49,37 +49,24 @@ public class CameraViewActivity extends Activity implements
 	ImageView mAttackImg ;
 	private SoundPool soundPool,soundPool2;
 	private int alertId,alertId2;
+	// 設定怪物 圖示 初級
 	int[] mMonsterprimary = new int[]{
 			R.mipmap.monsterprimary_1,
 			R.mipmap.monsterprimary_2,
 			R.mipmap.monsterprimary_3,
 			R.mipmap.monsterprimary_4,
 			R.mipmap.monsterprimary_5,
-			R.mipmap.monsterprimary_6,
-			R.mipmap.monsterprimary_7,
-			R.mipmap.monsterprimary_8,
-			R.mipmap.monsterprimary_9,
-			R.mipmap.monsterprimary10,
-			R.mipmap.monsterprimary_20,
-			R.mipmap.monsterprimary_21,
-			R.mipmap.monsterprimary_22,
-			R.mipmap.monsterprimary_23,
-			R.mipmap.monsterprimary_24,
-			R.mipmap.monsterprimary_25,
-			R.mipmap.monsterprimary_26,
-			R.mipmap.monsterprimary_27,
-			R.mipmap.monsterprimary_28,
-			R.mipmap.monsterprimary_29,
-			R.mipmap.monsterprimary_30};
+			R.mipmap.monsterprimary_6};
+	// 設定怪物 圖示 中級
 
 	int[] mMonsterintermediate = new int[]{
 			R.mipmap.monsterintermediate_1,
 			R.mipmap.monsterintermediate_2,
 			R.mipmap.monsterintermediate_3,
 			R.mipmap.monsterintermediate_4,
-			R.mipmap.monsterintermediate_5,
-			R.mipmap.monsterintermediate_6,
-			R.mipmap.monsterintermediate_7};
+			R.mipmap.monsterintermediate_5};
+	// 設定怪物 圖示 高級
+
 	int[] mMonsterBoss = new int[]{
 			R.mipmap.monsterboss_1,
 			R.mipmap.monsterboss_2};
@@ -103,6 +90,7 @@ public class CameraViewActivity extends Activity implements
 		setAugmentedRealityPoint();
 	}
 
+	 // 透過 地圖回傳的經緯度 設定怪物
 	private void setAugmentedRealityPoint() {
 		Double lat = getIntent().getExtras().getDouble("latitude");
 		Double lon =  getIntent().getExtras().getDouble("longitude");
@@ -122,6 +110,7 @@ public class CameraViewActivity extends Activity implements
 
 	}
 
+	// 設定 怪物路徑
 	public double calculateTeoreticalAzimuth() {
 		double dX = mPoi.getPoiLatitude() - mMyLatitude;
 		double dY = mPoi.getPoiLongitude() - mMyLongitude;
@@ -146,7 +135,7 @@ public class CameraViewActivity extends Activity implements
 
 		return phiAngle;
 	}
-
+	// 設定 怪物路徑  透過手機 搖晃
 	private List<Double> calculateAzimuthAccuracy(double azimuth) {
 		double minAngle = azimuth - AZIMUTH_ACCURACY;
 		double maxAngle = azimuth + AZIMUTH_ACCURACY;
@@ -164,7 +153,7 @@ public class CameraViewActivity extends Activity implements
 
 		return minMax;
 	}
-
+	// 計算怪物 出現的公式
 	private boolean isBetween(double minAngle, double maxAngle, double azimuth) {
 		if (minAngle > maxAngle) {
 			if (isBetween(0, maxAngle, azimuth) && isBetween(minAngle, 360, azimuth))
@@ -176,13 +165,11 @@ public class CameraViewActivity extends Activity implements
 		return false;
 	}
 
-	private void updateDescription() {
-		descriptionTextView.setText(mPoi.getPoiName() + " azimuthTeoretical "
-				+ mAzimuthTeoretical + " azimuthReal " + mAzimuthReal + " latitude "
-				+ mMyLatitude + " longitude " + mMyLongitude);
-	}
+
 
 	private static final String TAG = "CameraViewActivity";
+	// 經緯度 改變的時候會呼叫
+
 	@Override
 	public void onLocationChanged(Location location) {
 		mMyLatitude = location.getLatitude();
@@ -206,55 +193,6 @@ public class CameraViewActivity extends Activity implements
 		} else {
 			pointerIcon.setVisibility(View.INVISIBLE);
 		}
-
-//		int fire = (int)(Math.random()* 49+1);
-//		int fireran = fire%20;
-
-//		if (fireran==0){
-//			mFireImg.setVisibility(View.VISIBLE);
-//			mhp = mhp - mattck;
-//			HpTextView.setText("HP:"+mhp);
-//			if (mhp==0){
-//				HpTextView.setText("HP:0");
-//				MySharedPreferncesHelp.saveIsFraction(CameraViewActivity.this,mhp);
-//				Toast.makeText(CameraViewActivity.this,"您輸了！！",Toast.LENGTH_SHORT).show();
-//				finish();
-//			}
-//
-//		}else {
-//			mFireImg.setVisibility(View.GONE);
-//
-//		}
-//		pointerIcon.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				mAttackImg.setVisibility(View.VISIBLE);
-//				hp = hp - attack;
-//				mhp = mhp + attack;
-//				mHPTextView.setText("HP:"+hp);
-//				soundPool.play(alertId, 1.0F, 1.0F, 0, 0, 1.0F);
-//				if (hp==0){
-//					mHPTextView.setText("怪物已死亡");
-//					Toast.makeText(CameraViewActivity.this,"擊敗怪物！！",Toast.LENGTH_SHORT).show();
-//					try {
-//						new Thread().sleep(500);
-//					} catch (InterruptedException e) {
-//						e.printStackTrace();
-//					}
-//					MySharedPreferncesHelp.saveIsFraction(CameraViewActivity.this,mhp);
-//					finish();
-//				}else {
-//
-//				}
-//
-//			}
-//		});
-//		mAttackImg.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				mAttackImg.setVisibility(View.INVISIBLE);
-//			}
-//		});
 	}
 
 	@Override
@@ -282,9 +220,10 @@ public class CameraViewActivity extends Activity implements
 		myCurrentAzimuth = new MyCurrentAzimuth(this, this);
 		myCurrentAzimuth.start();
 	}
+	// 設定元件 與及 怪物等級血量 與 時間
 
 	private void setupLayout() {
-
+		mhp = MySharedPreferncesHelp.getIsFraction(CameraViewActivity.this);
 		mFireImg = findViewById(R.id.fireimg);
 		mTimeText =findViewById(R.id.time);
 		pointerIcon = (ImageView) findViewById(R.id.icon);
@@ -292,7 +231,7 @@ public class CameraViewActivity extends Activity implements
 		mFractiText = findViewById(R.id.fa);
 		mAttackImg = findViewById(R.id.attack);
         mHPTextView = findViewById(R.id.hp);
-		mHPTextView.setText("分數:"+hp);
+		mHPTextView.setText("分數:"+mhp);
 		int mo = getIntent().getExtras().getInt("num");
 		int i;
 		switch (mo){
@@ -328,27 +267,27 @@ public class CameraViewActivity extends Activity implements
 				pointerIcon.setImageResource(mMonsterprimary[i]);
 				break;
 		}
-//		mAttackImg.setVisibility(View.INVISIBLE);
+		//倒數計時器 以等級去設定不同時間
 
-
-//		HpTextView.setText("HP:"+mhp);
 		new CountDownTimer(m_time,1000){
 
 			@Override
 			public void onFinish() {
 				mTimeText.setText("時間結束!");
 				if (!isAppear){
+					mhp = mhp-hp;
+					MySharedPreferncesHelp.saveIsFraction(CameraViewActivity.this,mhp);
 					Toast.makeText(CameraViewActivity.this,"沒發現怪物 您輸了！！",Toast.LENGTH_SHORT).show();
 					finish();
 				}else {
-					MySharedPreferncesHelp.saveIsFraction(CameraViewActivity.this,hp);
+					mhp = mhp+hp;
+					MySharedPreferncesHelp.saveIsFraction(CameraViewActivity.this,mhp);
 					Toast.makeText(CameraViewActivity.this,"恭喜您找到怪物",Toast.LENGTH_SHORT).show();
 					finish();
 				}
-
+				isAppear = false;
 
 			}
-
 			@Override
 			public void onTick(long millisUntilFinished) {
 				mTimeText.setText("00:"+millisUntilFinished/1000);
